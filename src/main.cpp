@@ -158,7 +158,7 @@
 	};
 #endif
 
-#define SerialPort Serial
+#define SerialPort Serial1
 
 #ifdef LED_POWER_PIN
 	#pragma message(VAR_NAME_VALUE(LED_POWER_PIN))
@@ -202,10 +202,10 @@ void setup()
 	bool multicore = true;
 
 	// Init serial port
-	Serial.setRxBufferSize(MAX_BUFFER - 1);
-	Serial.setTimeout(50);
-	Serial.begin(SERIALCOM_SPEED);
-	while (!Serial) continue;
+	Serial1.setRxBufferSize(MAX_BUFFER - 1);
+	Serial1.setTimeout(50);
+	Serial1.begin(SERIALCOM_SPEED);
+	while (!Serial1) continue;
 
 	#if defined(NEOPIXEL_RGBW) || defined(NEOPIXEL_RGB)
 		#ifdef NEOPIXEL_RGBW
@@ -229,18 +229,18 @@ void setup()
 		#if defined(NEOPIXEL_RGBW) || defined(NEOPIXEL_RGB)
 			#ifdef NEOPIXEL_RGBW
 				#ifdef COLD_WHITE
-					Serial.println("NeoPixelBus SK6812 cold GRBW. ");
+					Serial1.println("NeoPixelBus SK6812 cold GRBW. ");
 				#else
-					Serial.println("NeoPixelBus SK6812 neutral GRBW. ");
+					Serial1.println("NeoPixelBus SK6812 neutral GRBW. ");
 				#endif
 				calibrationConfig.printCalibration();
 			#else
-				Serial.println("NeoPixelBus ws281x type (GRB).");
+				Serial1.println("NeoPixelBus ws281x type (GRB).");
 			#endif
 		#elif defined(SPILED_APA102)
-			Serial.println("SPI APA102 compatible type (BGR).");
+			Serial1.println("SPI APA102 compatible type (BGR).");
 		#elif defined(SPILED_WS2801)
-			Serial.println("SPI WS2801 (RBG).");
+			Serial1.println("SPI WS2801 (RBG).");
 		#endif
 
 		//Serial.flush();
@@ -248,8 +248,8 @@ void setup()
 	#endif
 
 	#if defined(LED_POWER_PIN)
-		Serial.write("LED_POWER_PIN = ");
-		Serial.println(LED_POWER_PIN);
+		Serial1.write("LED_POWER_PIN = ");
+		Serial1.println(LED_POWER_PIN);
 		powerControl.init();
 	#endif
 
